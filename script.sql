@@ -1,11 +1,11 @@
-#------------------------------------------------------------
-#        Script MySQL.
-#------------------------------------------------------------
+------------------------------------------------------------
+        --Script MySQL.
+------------------------------------------------------------
 
 
-#------------------------------------------------------------
-# Table: Client
-#------------------------------------------------------------
+------------------------------------------------------------
+ --Table: Client
+------------------------------------------------------------
 
 CREATE TABLE Client(
         NUM_CLIENT        Int  Auto_increment  NOT NULL ,
@@ -19,12 +19,12 @@ CREATE TABLE Client(
         ADRESSE__CLIENT   Text NOT NULL ,
         CP__CLIENT        Int NOT NULL
 	,CONSTRAINT Client_PK PRIMARY KEY (NUM_CLIENT)
-)ENGINE=InnoDB;
+);
 
 
-#------------------------------------------------------------
-# Table: Smartphone
-#------------------------------------------------------------
+------------------------------------------------------------
+ --Table: Smartphone
+------------------------------------------------------------
 
 CREATE TABLE Smartphone(
         NUM_SMARTPHONE                       Int  Auto_increment  NOT NULL ,
@@ -39,24 +39,24 @@ CREATE TABLE Smartphone(
         COMPATIBILITE_RESEAU_SMARTPHONE      Text NOT NULL ,
         EDITION_LIMITE_SMARTPHONE            Bool NOT NULL
 	,CONSTRAINT Smartphone_PK PRIMARY KEY (NUM_SMARTPHONE)
-)ENGINE=InnoDB;
+);
 
 
-#------------------------------------------------------------
-# Table: Forfait
-#------------------------------------------------------------
+------------------------------------------------------------
+ --Table: Forfait
+------------------------------------------------------------
 
 CREATE TABLE Forfait(
         NUM_FORFAIT   Int  Auto_increment  NOT NULL ,
         PRIX_FORFAIT  Float NOT NULL ,
         DUREE_FORFAIT Int NOT NULL
 	,CONSTRAINT Forfait_PK PRIMARY KEY (NUM_FORFAIT)
-)ENGINE=InnoDB;
+);
 
 
-#------------------------------------------------------------
-# Table: Commande
-#------------------------------------------------------------
+------------------------------------------------------------
+ --Table: Commande
+------------------------------------------------------------
 
 CREATE TABLE Commande(
         NUM_COMMANDE    Int  Auto_increment  NOT NULL ,
@@ -65,12 +65,12 @@ CREATE TABLE Commande(
 	,CONSTRAINT Commande_PK PRIMARY KEY (NUM_COMMANDE)
 
 	,CONSTRAINT Commande_Client_FK FOREIGN KEY (NUM_CLIENT) REFERENCES Client(NUM_CLIENT)
-)ENGINE=InnoDB;
+);
 
 
-#------------------------------------------------------------
-# Table: Facture
-#------------------------------------------------------------
+------------------------------------------------------------
+ --Table: Facture
+------------------------------------------------------------
 
 CREATE TABLE Facture(
         NUM_FACTURE                Int  Auto_increment  NOT NULL ,
@@ -80,12 +80,12 @@ CREATE TABLE Facture(
 
 	,CONSTRAINT Facture_Commande_FK FOREIGN KEY (NUM_COMMANDE) REFERENCES Commande(NUM_COMMANDE)
 	,CONSTRAINT Facture_Commande_AK UNIQUE (NUM_COMMANDE)
-)ENGINE=InnoDB;
+);
 
 
-#------------------------------------------------------------
-# Table: CONTENIR
-#------------------------------------------------------------
+------------------------------------------------------------
+ --Table: CONTENIR
+------------------------------------------------------------
 
 CREATE TABLE CONTENIR(
         NUM_SMARTPHONE Int NOT NULL ,
@@ -96,12 +96,12 @@ CREATE TABLE CONTENIR(
 	,CONSTRAINT CONTENIR_Smartphone_FK FOREIGN KEY (NUM_SMARTPHONE) REFERENCES Smartphone(NUM_SMARTPHONE)
 	,CONSTRAINT CONTENIR_Forfait0_FK FOREIGN KEY (NUM_FORFAIT) REFERENCES Forfait(NUM_FORFAIT)
 	,CONSTRAINT CONTENIR_Commande1_FK FOREIGN KEY (NUM_COMMANDE) REFERENCES Commande(NUM_COMMANDE)
-)ENGINE=InnoDB;
+);
 
 
-#------------------------------------------------------------
-# Table: VENDRE AVEC
-#------------------------------------------------------------
+------------------------------------------------------------
+ --Table: VENDRE AVEC
+------------------------------------------------------------
 
 CREATE TABLE VENDRE_AVEC(
         NUM_SMARTPHONE Int NOT NULL ,
@@ -110,12 +110,12 @@ CREATE TABLE VENDRE_AVEC(
 
 	,CONSTRAINT VENDRE_AVEC_Smartphone_FK FOREIGN KEY (NUM_SMARTPHONE) REFERENCES Smartphone(NUM_SMARTPHONE)
 	,CONSTRAINT VENDRE_AVEC_Forfait0_FK FOREIGN KEY (NUM_FORFAIT) REFERENCES Forfait(NUM_FORFAIT)
-)ENGINE=InnoDB;
+);
 
 
-#------------------------------------------------------------
-# Table: METTRE DE COTE
-#------------------------------------------------------------
+------------------------------------------------------------
+ --Table: METTRE DE COTE
+------------------------------------------------------------
 
 CREATE TABLE METTRE_DE_COTE(
         NUM_SMARTPHONE Int NOT NULL ,
@@ -125,5 +125,5 @@ CREATE TABLE METTRE_DE_COTE(
 
 	,CONSTRAINT METTRE_DE_COTE_Smartphone_FK FOREIGN KEY (NUM_SMARTPHONE) REFERENCES Smartphone(NUM_SMARTPHONE)
 	,CONSTRAINT METTRE_DE_COTE_Client0_FK FOREIGN KEY (NUM_CLIENT) REFERENCES Client(NUM_CLIENT)
-)ENGINE=InnoDB;
+);
 
