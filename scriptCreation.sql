@@ -78,7 +78,8 @@ CREATE TABLE Commande(
 CREATE TABLE Facture(
         NUM_FACTURE                INTEGER PRIMARY KEY AUTOINCREMENT ,
         NUM_INTERMEDIAIRE_PAIEMENT Int NOT NULL ,
-        NUM_COMMANDE               Int NOT NULL
+        NUM_COMMANDE               Int NOT NULL,
+        DATE_FACTURE               DATE NOT NULL
 
 	,CONSTRAINT Facture_Commande_FK FOREIGN KEY (NUM_COMMANDE) REFERENCES Commande(NUM_COMMANDE)
 	,CONSTRAINT Facture_Commande_AK UNIQUE (NUM_COMMANDE)
@@ -140,7 +141,7 @@ INSERT INTO forfait(PRIX_FORFAIT,DUREE_FORFAIT) VALUES (30, 24);
 INSERT INTO forfait(PRIX_FORFAIT,DUREE_FORFAIT) VALUES (2, 12);
 INSERT INTO commande(statut_commande,num_client) VALUES ('en attente de paiment', 1);
 INSERT INTO commande(statut_commande,num_client) VALUES ('en attente de livraison', 2);
-INSERT INTO facture(num_intermediaire_paiement,num_commande) VALUES (56151541254, 1);
+INSERT INTO facture(num_intermediaire_paiement,num_commande, DATE_FACTURE) VALUES (56151541254, 1, date('2020-12-01'));
 INSERT INTO contenir(num_smartphone,num_forfait,NUM_COMMANDE) VALUES (1, 2, 2);
 INSERT INTO contenir(num_smartphone,num_forfait,NUM_COMMANDE) VALUES (1, 1, 2);
 INSERT INTO contenir(num_smartphone,num_forfait,NUM_COMMANDE) VALUES (1, 1, 1);

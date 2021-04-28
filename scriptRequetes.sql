@@ -30,9 +30,8 @@ WHERE NUM_SMARTPHONE NOT IN (SELECT NUM_SMARTPHONE
 
 SELECT NUM_SMARTPHONE, count(*) AS NBR_VENDU
 FROM Smartphone NATURAL JOIN CONTENIR NATURAL JOIN Commande NATURAL JOIN Facture
+WHERE strftime('%s', DATE_FACTURE) BETWEEN strftime('%s', date('2020-11-01')) AND strftime('%s', date('2020-12-31'))
 GROUP BY NUM_SMARTPHONE;
-
--- ATTENTION, ON A PAS MIS D'INDICATEUR DE DATE SUR LA FACTURE DONC J'AI PAS TRIE SELON LA DATE DE VENTE
 
 -- Quels sont les clients originaires de Marseille qui ont commandé des smartphones de la marque «Apple»
 
@@ -41,5 +40,3 @@ FROM Client
 WHERE VILLE_CLIENT = 'MARSEILLE' AND NUM_CLIENT IN (SELECT NUM_CLIENT
                                                     FROM Commande NATURAL JOIN CONTENIR NATURAL JOIN Smartphone
                                                     WHERE MARQUE_SMARTPHONE = 'APPLE');
-
-						
