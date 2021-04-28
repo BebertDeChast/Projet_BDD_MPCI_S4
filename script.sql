@@ -1,24 +1,29 @@
 ------------------------------------------------------------
         --Script MySQL.
 ------------------------------------------------------------
-
-
+DROP TABLE IF EXISTS METTRE_DE_COTE;
+DROP TABLE IF EXISTS VENDRE_AVEC;
+DROP TABLE IF EXISTS CONTENIR;
+DROP TABLE IF EXISTS Facture;
+DROP TABLE IF EXISTS Commande;
+DROP TABLE IF EXISTS Forfait;
+DROP TABLE IF EXISTS Smartphone;
+DROP TABLE IF EXISTS Client;
 ------------------------------------------------------------
  --Table: Client
 ------------------------------------------------------------
 
 CREATE TABLE Client(
-        NUM_CLIENT        Int  Auto_increment  NOT NULL ,
+        NUM_CLIENT        INTEGER PRIMARY KEY AUTOINCREMENT,
         NOM_CLIENT        Text NOT NULL ,
-        PREMON_CLIENT     Text NOT NULL ,
+        PRENOM_CLIENT     Text NOT NULL ,
         DATE_NAISS_CLIENT Date NOT NULL ,
         HASH_MDP_CLIENT   Text NOT NULL ,
         MAIL_CLIENT       Text NOT NULL ,
         PAYS_CLIENT       Text NOT NULL ,
         VILLE_CLIENT      Text NOT NULL ,
-        ADRESSE__CLIENT   Text NOT NULL ,
-        CP__CLIENT        Int NOT NULL
-	,CONSTRAINT Client_PK PRIMARY KEY (NUM_CLIENT)
+        ADRESSE_CLIENT   Text NOT NULL ,
+        CP_CLIENT        Int NOT NULL
 );
 
 
@@ -27,7 +32,7 @@ CREATE TABLE Client(
 ------------------------------------------------------------
 
 CREATE TABLE Smartphone(
-        NUM_SMARTPHONE                       Int  Auto_increment  NOT NULL ,
+        NUM_SMARTPHONE                       INTEGER PRIMARY KEY AUTOINCREMENT,
         MARQUE_SMARTPHONE                    Text NOT NULL ,
         MODELE_SMARTPHONE                    Text NOT NULL ,
         COULEUR_SMARTPHONE                   Text NOT NULL ,
@@ -38,7 +43,6 @@ CREATE TABLE Smartphone(
         RESOLUTION_APPAREIL_PHOTO_SMARTPHONE Float NOT NULL ,
         COMPATIBILITE_RESEAU_SMARTPHONE      Text NOT NULL ,
         EDITION_LIMITE_SMARTPHONE            Bool NOT NULL
-	,CONSTRAINT Smartphone_PK PRIMARY KEY (NUM_SMARTPHONE)
 );
 
 
@@ -47,10 +51,10 @@ CREATE TABLE Smartphone(
 ------------------------------------------------------------
 
 CREATE TABLE Forfait(
-        NUM_FORFAIT   Int  Auto_increment  NOT NULL ,
+        NUM_FORFAIT   INTEGER PRIMARY KEY AUTOINCREMENT,
         PRIX_FORFAIT  Float NOT NULL ,
         DUREE_FORFAIT Int NOT NULL
-	,CONSTRAINT Forfait_PK PRIMARY KEY (NUM_FORFAIT)
+	
 );
 
 
@@ -59,10 +63,9 @@ CREATE TABLE Forfait(
 ------------------------------------------------------------
 
 CREATE TABLE Commande(
-        NUM_COMMANDE    Int  Auto_increment  NOT NULL ,
+        NUM_COMMANDE    INTEGER PRIMARY KEY AUTOINCREMENT,
         STATUT_COMMANDE Text NOT NULL ,
         NUM_CLIENT      Int NOT NULL
-	,CONSTRAINT Commande_PK PRIMARY KEY (NUM_COMMANDE)
 
 	,CONSTRAINT Commande_Client_FK FOREIGN KEY (NUM_CLIENT) REFERENCES Client(NUM_CLIENT)
 );
@@ -73,10 +76,9 @@ CREATE TABLE Commande(
 ------------------------------------------------------------
 
 CREATE TABLE Facture(
-        NUM_FACTURE                Int  Auto_increment  NOT NULL ,
+        NUM_FACTURE                INTEGER PRIMARY KEY AUTOINCREMENT ,
         NUM_INTERMEDIAIRE_PAIEMENT Int NOT NULL ,
         NUM_COMMANDE               Int NOT NULL
-	,CONSTRAINT Facture_PK PRIMARY KEY (NUM_FACTURE)
 
 	,CONSTRAINT Facture_Commande_FK FOREIGN KEY (NUM_COMMANDE) REFERENCES Commande(NUM_COMMANDE)
 	,CONSTRAINT Facture_Commande_AK UNIQUE (NUM_COMMANDE)
