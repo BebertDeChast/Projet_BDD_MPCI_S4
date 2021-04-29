@@ -91,8 +91,8 @@ CREATE TABLE Facture(
 ------------------------------------------------------------
 
 CREATE TABLE CONTENIR(
-        NUM_SMARTPHONE Int NOT NULL ,
-        NUM_FORFAIT    Int NOT NULL ,
+        NUM_SMARTPHONE Int,
+        NUM_FORFAIT    Int,
         NUM_COMMANDE   Int NOT NULL
 	,CONSTRAINT CONTENIR_PK PRIMARY KEY (NUM_SMARTPHONE,NUM_FORFAIT,NUM_COMMANDE)
 
@@ -129,21 +129,3 @@ CREATE TABLE METTRE_DE_COTE(
 	,CONSTRAINT METTRE_DE_COTE_Smartphone_FK FOREIGN KEY (NUM_SMARTPHONE) REFERENCES Smartphone(NUM_SMARTPHONE)
 	,CONSTRAINT METTRE_DE_COTE_Client0_FK FOREIGN KEY (NUM_CLIENT) REFERENCES Client(NUM_CLIENT)
 );
-
-------------------------------------------------------------
- --Insertion de valeurs test
-------------------------------------------------------------
-
-INSERT INTO client(NOM_CLIENT,PRENOM_CLIENT,DATE_NAISS_client,hash_mdp_client,mail_client,pays_client,ville_client,adresse_client,cp_client) VALUES ('Lennon', 'Bob', date('2001-12-12'), 'bulia', 'dovakin@mordor.lol', 'Bordeciel', 'Nightcity', '1 rue du dragon', 42042);
-INSERT INTO client(NOM_CLIENT,PRENOM_CLIENT,DATE_NAISS_client,hash_mdp_client,mail_client,pays_client,ville_client,adresse_client,cp_client) VALUES ('Vador', 'Dark', date('1500-12-24'), 'luke', 'order66@empire.death', 'Tatoine', 'mos esley', 'a droite de la cantina', 66666);
-INSERT INTO smartphone(marque_smartphone,modele_smartphone,couleur_smartphone,prix_smartphone,taille_ecran_smartphone,type_ecran_smartphone,stockage_smartphone,resolution_appareil_photo_smartphone,compatibilite_reseau_smartphone,edition_limite_smartphone) VALUES ('Huawei', 'M10 lite', 'Gris', 700.5, 6.3, 'oled', 128, 48, '5G+', FALSE), ('Huawei', 'M10 Edge', 'Plaqué Or', 6666.6, 6.3, 'oled', 128, 48, '5G+', TRUE);
-INSERT INTO forfait(PRIX_FORFAIT,DUREE_FORFAIT) VALUES (30, 24);
-INSERT INTO forfait(PRIX_FORFAIT,DUREE_FORFAIT) VALUES (2, 12);
-INSERT INTO commande(statut_commande,num_client) VALUES ('en attente de paiment', 1);
-INSERT INTO commande(statut_commande,num_client) VALUES ('en attente de livraison', 2);
-INSERT INTO facture(num_intermediaire_paiement,num_commande, DATE_FACTURE) VALUES (56151541254, 1, date('2020-12-01'));
-INSERT INTO contenir(num_smartphone,num_forfait,NUM_COMMANDE) VALUES (1, 2, 2);
-INSERT INTO contenir(num_smartphone,num_forfait,NUM_COMMANDE) VALUES (1, 1, 2);
-INSERT INTO contenir(num_smartphone,num_forfait,NUM_COMMANDE) VALUES (1, 1, 1);
-INSERT INTO vendre_avec(num_smartphone,num_forfait) VALUES (1, 1);
-INSERT INTO mettre_de_cote(num_smartphone,num_client,NOTIFICATION) VALUES (1, 1, TRUE);
