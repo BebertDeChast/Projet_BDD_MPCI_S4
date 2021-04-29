@@ -11,26 +11,29 @@ def ajout_client(nom, prenom) :
     connection.execute(f"""
     INSERT INTO client
     (NOM_CLIENT,PRENOM_CLIENT,DATE_NAISS_client,hash_mdp_client,mail_client,pays_client,ville_client,adresse_client,cp_client)
-     VALUES ('{nom}', '{prenom}', 'Inconnu', 1234, 'Inconnu', 'Inconnu', 'Inconnu', 'Inconnu', 'Inconnu')
-                        """)
+    VALUES ('{nom}', '{prenom}', 'Inconnu', 1234, 'Inconnu', 'Inconnu', 'Inconnu', 'Inconnu', 'Inconnu')
+    """)
 
 
 def affiche_smartphone(marque):
 
     """ Affiche la table obtenue, attention l'argument est sensible aux majuscules"""
 
-    for row in connection.execute(f"""
+    afficher_table(f"""
     SELECT *
     FROM Smartphone
-    WHERE MARQUE_SMARTPHONE = '{marque}' """) :
-        print(row)
+    WHERE MARQUE_SMARTPHONE = '{marque}' 
+    """)
 
 
-# Petite fonction bonus
-def afficher_table(table):
-    """ Prend en entré une table (SELECT statement) et l'affiche """
-    for row in table:
+# Petite fonction bonus car nous on aime automatiser
+def afficher_table(query):
+    """ Prend en entré une requête SQL (SELECT statement) et l'affiche """
+    for row in connection.execute(query):
         print(row) # Testé et approuvé par la street (moi)
+
+# Un petit test
+affiche_smartphone('Huawei')
 
 
 # Sauvegarde les modifications à la BD et coupe la connexion
